@@ -7,3 +7,4 @@
 - [1.1](https://github.com/Brian-Lin-2/kubernetes-practice/tree/1.1)
 - [1.2](https://github.com/Brian-Lin-2/kubernetes-practice/tree/1.2)
 - [1.3](https://github.com/Brian-Lin-2/kubernetes-practice/tree/1.3)
+- [1.3](https://github.com/Brian-Lin-2/kubernetes-practice/tree/1.4)
