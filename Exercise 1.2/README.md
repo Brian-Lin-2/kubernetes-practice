@@ -1,4 +1,4 @@
-# Exercise 2
+# Exercise 1.2
 
 ```bash
 kubectl create deployment todo-server --image=brianlin24/todo-server
