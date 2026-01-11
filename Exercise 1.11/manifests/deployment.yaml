@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exercise-1-11
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exercise-1-11
+  template:
+    metadata:
+      labels:
+        app: exercise-1-11
+    spec:
+      volumes:
+        - name: ping-log
+          persistentVolumeClaim:
+            claimName: ping-log
+      containers:
+        - name: ping-pong
+          image: brianlin24/ping-pong
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: ping-log
+              mountPath: /src/data
+        - name: log-output
+          image: brianlin24/log-output
+          ports:
+            - containerPort: 8001
+          volumeMounts:
+            - name: ping-log
+              mountPath: /src/data

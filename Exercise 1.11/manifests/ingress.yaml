@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: exercise-1-11-ing
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: exercise-1-11-svc
+            port:
+              number: 3001
+     
+      - path: /pingpong
+        pathType: Prefix
+        backend:
+          service:
+            name: exercise-1-11-svc
+            port:
+              number: 3000
