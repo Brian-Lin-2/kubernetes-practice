@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-app
+  template:
+    metadata:
+      labels:
+        app: log-app
+    spec:
+      volumes:
+        - name: log-app
+          emptyDir: {}
+      containers:
+        - name: random-string
+          image: brianlin24/random-string
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: log-app
+              mountPath: /src/data
+        
+        - name: file-reader
+          image: brianlin24/file-reader
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: log-app
+              mountPath: /src/data
