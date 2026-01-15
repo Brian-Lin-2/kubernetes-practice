@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-server
+  template:
+    metadata:
+      labels:
+        app: todo-server
+    spec:
+      volumes:
+        - name: rand-image
+          persistentVolumeClaim:
+            claimName: rand-image
+      containers:
+        - name: todo-server
+          image: brianlin24/todo-server
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: rand-image
+              mountPath: /src/data
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: todo-config
+        - name: todo-backend
+          image: brianlin24/todo-backend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8001
+          envFrom:
+            - configMapRef:
+                name: todo-config

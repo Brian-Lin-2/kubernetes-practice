@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-config
+data:
+  SERVER_PORT: "8000"
+  BACKEND_PORT: "8001"
