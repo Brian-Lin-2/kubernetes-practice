@@ -21,3 +21,4 @@
 ### Chapter 3
 - [2.1](https://github.com/Brian-Lin-2/kubernetes-practice/tree/2.1)
 - [2.2](https://github.com/Brian-Lin-2/kubernetes-practice/tree/2.2)
+- [2.5](https://github.com/Brian-Lin-2/kubernetes-practice/tree/2.5)

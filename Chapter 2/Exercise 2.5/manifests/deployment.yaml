@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ping-log
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ping-log
+  template:
+    metadata:
+      labels:
+        app: ping-log
+    spec:
+      containers:
+        - name: ping-pong
+          image: brianlin24/ping-pong
+          ports:
+            - containerPort: 8000
+          imagePullPolicy: Always
+
+        - name: log-output
+          image: brianlin24/log-output
+          ports:
+            - containerPort: 8001
+          imagePullPolicy: Always
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-config
+                  key: MESSAGE
+          volumeMounts:
+            - name: log-config-volume
+              mountPath: /config
+
+      volumes:
+        - name: log-config-volume
+          configMap:
+            name: log-config
+ 

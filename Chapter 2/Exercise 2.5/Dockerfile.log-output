@@ -1,0 +1,13 @@
+FROM python:3.12-alpine
+
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /src
+
+COPY ./src/log-output.py .
+
+RUN pip install flask requests
+
+EXPOSE 8001
+
+CMD ["python3", "log-output.py"]
