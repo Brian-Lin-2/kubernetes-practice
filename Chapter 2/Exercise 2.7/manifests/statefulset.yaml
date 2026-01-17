@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ping-db
+spec:
+  serviceName: ping-db-svc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ping-db
+  template:
+    metadata:
+      labels:
+        app: ping-db
+    spec:
+      containers:
+        - name: postgres-db
+          image: postgres:latest
+          ports:
+            - name: db
+              containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: admin
+            - name: POSTGRES_PASSWORD
+              value: secret
+            - name: POSTGRES_DB
+              value: mydb
+          volumeMounts:
+            - name: ping-volume
+              mountPath: /var/lib/postgresql
+  volumeClaimTemplates:
+    - metadata:
+        name: ping-volume
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi
+
