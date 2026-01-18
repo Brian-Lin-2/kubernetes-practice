@@ -1,0 +1,11 @@
+FROM alpine:3.18
+
+WORKDIR /src
+
+RUN apk add --no-cache curl
+
+COPY src/cron.sh .
+
+RUN chmod +x ./cron.sh
+
+CMD ["./cron.sh"] 

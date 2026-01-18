@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-db-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: todo-db
+  ports:
+    - port: 3002
+      targetPort: 5432
